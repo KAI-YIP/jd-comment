@@ -2,22 +2,28 @@
 import os
 import sys
 import time
+import re
 
 t1=time.time()
-support=0.01
-f1=open("/home/alber/data_base/jd_content/app-mac/mac-result2.txt",'r')
+support=6
+coffidence=0.5
+f1=open("/home/alber/data_base/laoxu/test.txt",'r')
 content=f1.readlines()
+content_str=' '.join(content)
 f1.close()
-f2=open("/home/alber/data_base/jd_content/app-mac/mac-result3.txt",'a')
+f2=open("/home/alber/data_base/laoxu/result3.txt",'w')
 Num_lines=sum([lines.count("\n") for lines in content])
-Num_blank=sum([lines.count(" ") for lines in content])
+iteration=0
+wordlist=[]
 print Num_lines
 for line in content:
+	iteration=iteration+1
+	print "iteration %d"%(iteration)
 	line=line.strip('\n')
 	result=[]
 	linelen = len(line)
 	a=0
-	for k in range(linelen) :
+	for k in range(linelen):
 		if line[k:k+1]==" ":
 			a=k+1
 			result.append(a)
@@ -26,25 +32,41 @@ for line in content:
 			if i==0:
 				j1=int(result[1])-1
 				target=line[0:j1]
+				if target not in wordlist:
+					wordlist.append(target)
 			elif i<=(len(result)-2) and i>=1:
 				j1=int(result[i-1])
 				j2=int(result[(i+1)])-1
 				target=line[j1:j2]
-			elif i==len(result)-1:
-				pass
+				if target not in wordlist:
+					wordlist.append(target)
 			else:
 				pass
-			Num_target=sum([lines.count(target) for lines in content])
-			Support=float(Num_target)/Num_lines
-			if Support>=support:
-				f2.write(target+"\n")
 		else:
 			pass
+iteration=0
+for word in wordlist:
+	f_word=re.split(r'\s+', word)
+	word_before=f_word[0]
+	word_after=f_word[1]
+	if word_before!="tttttttt" and word_after!="tttttttt":
+		Num_before=content_str.count(word_before)
+		Num_after=content_str.count(word_after) 
+		max_coff=max(Num_before,Num_after)
+		Num_word=content_str.count(word)
+		Support=float(Num_word)
+		if Support>=support:
+			Coffidence=float(Num_word)/max_coff
+			if Coffidence>=coffidence:
+				iteration=iteration+1
+				print "counted %d"%(iteration)	
+				f2.write(word+"\n")
+			else:
+				pass
+		else:
+			pass
+	else:
+		pass		
 f2.close()
 t2=time.time()
 print str(t2-t1)
-		
-
-			
-
-
