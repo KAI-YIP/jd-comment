@@ -10,14 +10,11 @@ t1=time.time()
 stopwords = {}.fromkeys([ line.rstrip() for line in open('/home/alber/jieba/stopwords.txt') ])
 f=open("/home/alber/data_base/jd_content/app-mac/app-mac.txt","r") #读取文本  
 txtlist=f.read().decode('utf-8')
-segs=jieba.cut(txtlist)
-for line in segs:
-	words = pseg.cut(line) #进行分词  
-	result=""  #记录最终结果的变量  
+words=jieba.cut(txtlist)  
 	for w in words: 
 		seg=str(w.word.encode('utf-8'))
 		if seg not in stopwords:
-			result+=str(seg)+" "#+"/"+str(w.flag)+" " #加词性标注  
+			result+=str(seg)+" "#+"/"+str(w.flag)+" " #去停用词  
 			f=open("/home/alber/data_base/jd_content/app-mac/mac-result-nostopword.txt","a")  #将结果保存到另一个文档中  
 			f.write(result)
 	
