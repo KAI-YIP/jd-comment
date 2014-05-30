@@ -5,13 +5,13 @@ import time
 import re
 
 t1=time.time()
-support=6
+support=4
 coffidence=0.5
-f1=open("/home/alber/data_base/laoxu/test.txt",'r')
+f1=open("/home/alber/data_base/jd_content/app-mac/mac-result4.txt",'r')
 content=f1.readlines()
 content_str=' '.join(content)
 f1.close()
-f2=open("/home/alber/data_base/laoxu/result3.txt",'w')
+f2=open("/home/alber/data_base/jd_content/app-mac/mac-result5.txt",'w')
 Num_lines=sum([lines.count("\n") for lines in content])
 iteration=0
 wordlist=[]
