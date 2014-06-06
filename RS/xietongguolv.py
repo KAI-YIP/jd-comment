@@ -139,7 +139,7 @@ class UserBasedCF:
         return ret / (n * 1.0)
     
 def testRecommend():
-    ubcf = UserBasedCF('D:python/bigdata/movielens_train.data')
+    ubcf = UserBasedCF('/home/alber/data_base/bigdata/movielens_train.data')
     ubcf.readData()
     ubcf.splitData(4,100)
     ubcf.userSimilarity()
@@ -150,7 +150,7 @@ def testRecommend():
         record = items.get(i,0)
         print "%5s: %.4f--%.4f" %(i,rvi,record)
 def testUserBasedCF():
-    cf  =  UserBasedCF('D:python/bigdata/movielens_train.data')
+    cf  =  UserBasedCF('/home/alber/data_base/bigdata/movielens_train.data')
     cf.userSimilarityBest()
     print "%3s%20s%20s%20s%20s" % ('K',"recall",'precision','coverage','popularity')
     for k in [5,10,20,40,80,160]:

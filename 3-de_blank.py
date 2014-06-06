@@ -4,8 +4,8 @@ import sys
 import re
 import time
 
-f1=open("/home/alber/data_base/jd_content/app-mac/mac-result2.txt",'r+')
-f2=open("/home/alber/data_base/jd_content/app-mac/mac-result3.txt","a")
+f1=open("/home/alber/data_base/jd_content/cameraD90/CameraD90.txt",'r+')
+f2=open("/home/alber/data_base/jd_content/cameraD90/CameraD90-result.txt","a")
 txt=f1.readlines()
 f1.close()
 list1=[]
