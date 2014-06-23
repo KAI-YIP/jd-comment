@@ -2,10 +2,10 @@
 import os
 import sys
 
-f1=open("/home/alber/KuaiPan/data_base/jd_content/app-mac/lda/mac.txt","r")
+f1=open("/home/alber/KuaiPan/data_base/jd_content/app-mac/lda/mac-clean.txt","r")
 txt=f1.readlines()
 f1.close()
-f2=open("/home/alber/KuaiPan/data_base/jd_content/app-mac/lda/mac-result.txt",'a')
+f2=open("/home/alber/KuaiPan/data_base/jd_content/app-mac/lda/mac-clean-result.txt",'a')
 
 for line in txt:
 	a=" ".join(line.split())
