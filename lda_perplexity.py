@@ -19,7 +19,7 @@ def dictionary_found(wordlist):
 			pass
 	return word_dictionary1
 
-def look_into_dic(dictionary,testset):
+def look_into_dic(dictionary,testset,iteration):
 	'''Calculates the TF-list for perplexity'''	
 	frequency=[]
 	letter_list=[]
@@ -33,11 +33,11 @@ def look_into_dic(dictionary,testset):
 			pass
 	for each in frequency:
 		if each!=None:
-			a=a+math.log(float(each))
+			a=a+math.log(float(each)/iteration)
 		else:
 			pass
-	return -a
-
+	b=-a
+	return b 
 
 def f_testset_word_count(testset):
 	'''reture the sum of words in testset which is the denominator of the formula of Perplexity'''
@@ -47,7 +47,7 @@ def f_testset_word_count(testset):
 def f_perplexity(word_frequency,word_count):
 	'''Search the probability of each word in dictionary
 	Calculates the perplexity of the LDA model for every parameter T'''
-	duishu=-word_frequency
+	duishu=word_frequency
 	kuohaoli=duishu/word_count
 	perplexity=math.exp(kuohaoli)
 	return perplexity
@@ -63,12 +63,12 @@ def graph_draw(topic,perplexity):
 
 topic=[]
 perplexity_list=[]
-f1=open('/home/alber/lda/GibbsLDA/jd/test1.dat','r')
+f1=open('/home/alber/lda/GibbsLDA/test3.txt','r')
 testset=f1.read()
 testset_word_count=f_testset_word_count(testset)		 #call the function to count the sum-words in testset
-for i in xrange(15):
+for i in xrange(10):
 	dictionary={}
-	iteration=(5*i+30)
+	iteration=(2*i+31)
 	topic.append(iteration)
 	trace="/home/alber/lda/GibbsLDA/jd/stats/model-final-"+str(iteration)+".txt"
 	f=open(trace,'r')
@@ -81,7 +81,7 @@ for i in xrange(15):
 		else:
 			pass
 	word_dictionary=dictionary_found(word_list)
-	frequency=look_into_dic(word_dictionary,testset)
+	frequency=look_into_dic(word_dictionary,testset,iteration)
 	perplexity=f_perplexity(frequency,testset_word_count)
 	perplexity_list.append(perplexity)		
 graph_draw(topic,perplexity_list)
