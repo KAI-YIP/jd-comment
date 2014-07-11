@@ -1,24 +1,10 @@
 # -*- coding: utf-8 -*-
-import os
-import sys
+import matplotlib.pyplot as plt
+import numpy as np
 
-dou = u"，"
-ju = u"。"
-gan = u"！"
-biaodian = ",.!" + dou + ju + gan
-
-print(len(biaodian))
-f1 = open("/home/alber/experiment/20140709/sample_result0.txt", 'r')
-txt = f1.readlines()
-f1.close()
-f2 = open("/home/alber/experiment/20140709/sample_result2.txt", 'a')
-for line in txt:
-	print(line)
-	line_clean = line.split()
-	for word in line_clean:
-		if word in biaodian:
-		f2.write("\n")
-	else:
-		f2.write(word)
-	
-	f2.write("\n")
+dict = {'形':40,'条':70,'C':30,'D':85}
+for i , key in enumerate(dict):
+	plt.bar(i,dict[key])#i为0,1,2,3,指的是第i条条形
+plt.xticks(np.arange(len(dict))+0.4,dict.keys().encoding('utf-8'))
+plt.yticks(dict.values())
+plt.show()
