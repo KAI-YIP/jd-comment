@@ -4,13 +4,27 @@ import sys
 import re
 import time
 
+def open_file(string):
+	"""open the txt file to process"""
+	f=open(string,'r')
+	txt=f.readlines()
+	return txt
+
+
+def save_file(string,list_txt):
+	"""save the result into a txt"""
+	f2=open(string,'a')
+	for line in list_txt:
+		f2.write(line)
+
+
 def cixing_choose(txt0):
-"""choose the noun(and the verb,objective and others) for the text after segment the word"""
+	"""choose the noun(and the verb,objective and others) for the text after segment the word"""
 	txtlist=[]
 	noun=["/n","/ns","/nt","/nz","/ng"]
 	verb=["/v","/vd","/vn","/vshi","/vyou","/vf","/vx","/vi","/vl","/vg"]
 	objective=["/a","/ad","/an","/ag","/al"]
-	other=["/l","/eng","/m","/mq","/t","/tg","/f","/s"]
+	other=["/l","/eng","/m","/mq","/t","/tg","/f","/s","/x"]
 	cixing=noun+verb+objective+other
 	for line in txt0:
 		line_list2=re.split('[ ]', line)
@@ -33,41 +47,29 @@ def cixing_choose(txt0):
 
 
 def de_blank(txt1):
-"""delete the blank of the sample_test.txt"""
+	"""delete the blank of the sample_test.txt"""
 	list1=[]
 	for line in txt1:
-		if len(line)>=4:
-			line_clean=" ".join(line.split())
-			lines=line_clean+" "+"\n"
-			list1.append(lines)
+		if line!=" ":
+			list1.append(line)
 		else:
 			pass
 	return list1
 
-def de_oneword_line(txt2):
-"""delete the  line of txt whose lenth is leth than 2"""
-	list2=[]
-	for line in txt2:
-		line_clean=line.split()
-		if len(line_clean)>=2:
-			line_new=" ".join(line_clean)+"\n"
-			list2.append(line_new)
-	return list2
-
-def lineself_copy(txt3):
-"""copy the line for Gibbs sampling"""	
+def lineself_copy(txt2):
+	"""copy the line for Gibbs sampling"""	
 	list3=[]
-	for line in txt3:
+	for line in txt2:
 		a=" ".join(line.split())
 		line_extend=a+" "+a+" "+a+" "+a+" "+a+"\n"
 		list3.append(line_extend)
 	return list3
 
-def cixing_filter(txt4):
-"""filter the word we don't need according the cixing"""
+def cixing_filter(txt3):
+	"""filter the word we don't need according the cixing"""
 	txtlist=[]
 	cixing=["/x","/zg","/uj","/ul","/e","/d","/uz","/y"]
-	for line in txt4:
+	for line in txt3:
 		line_list2=re.split('[ ]', line)
 		line_list=line_list2[:]
 		for segs in line_list2:
@@ -90,3 +92,11 @@ def cixing_filter(txt4):
 	return result_list
 
 
+trace_sample="/home/alber/experiment/20140711/sample_result1.txt"
+trace_result="/home/alber/experiment/20140711/sample_result2.txt"
+file_txt=open_file(trace_sample)
+txt0=cixing_choose(file_txt)
+print txt0[:4]
+txt1=de_blank(txt0)
+print txt1[:4]
+save_file(trace_result,txt1)
