@@ -1,6 +1,10 @@
-#coding:utf-8
+#coding=utf-8
+import re
+from matplotlib.font_manager import FontProperties
+import math
 import numpy as np
+import matplotlib.pylab as plt
 
-lists=[1,2,3,4,5,6,7,8,9,10,11,12]
-for i in range(len(lists)):
-	print (i)
+x=[0,1,2,3,4,5]
+arr=[0,1,2,3,4,5]
+plt.plot(x,arr)
