@@ -72,11 +72,19 @@ def f_combine_U_S_V(matric_u,matric_s,matirc_v):
 	new_document_matric=np.dot(np.dot(matric_u,np.diag(matric_s)),matirc_v)
 	return new_document_matric
 
-def f_matric_to_document(document_matric):
+def f_matric_to_document(document_matric,word_list_self):
 	"""transform the matric to document,将矩阵转换为文档"""
 	new_document=[]
 	for line in document_matric:
-		line_sorted=sorted(line,reverse=True)
+		count=0
+		for word in line:
+			if float(word)>=0.9:                                                                                     #转换后文档中词选择的阈值
+				new_document.append(word_list_self[count]+" ")
+			else:
+				pass
+			count+=1
+		new_document.append("\n")
+	return new_document
 
 
 def f_save_file(trace,document):
@@ -86,7 +94,7 @@ def f_save_file(trace,document):
 			f.write(word)
 
 trace_open="/home/alber/experiment/test.txt"
-trace_save="/home/alber/....."
+trace_save="/home/alber/experiment/20140715/svd_result1.txt"
 txt=f_file_open(trace_open)
 word_vector=f_vector_found(txt)
 print (len(word_vector))
@@ -100,14 +108,15 @@ for line in txt:								#transform the document set to matric
 print (len(document))
 U,S,V=f_svd_calculate(document)
 print (sum(S))
+plt.plot(S)
+plt.show()
 N_count,document_matric_S=f_process_matric_S(S,0.9)
 document_matric_U=f_process_matric_U(U,N_count)
 document_matric_V=f_process_matric_V(V,N_count)
 print (len(document_matric_U[1]))
 print (len(document_matric_V))
 new_document_matric=f_combine_U_S_V(document_matric_U,document_matric_S,document_matric_V)
-list1=[]
-for i in new_document_matric[0]:
-	list1.append(i)
-list2=sorted(list1)
-print (list2)
+print (sorted(new_document_matric[1],reverse=True))
+new_document=f_matric_to_document(new_document_matric,word_vector)
+f_save_file(trace_save,new_document)
+print ("the new document has been saved in %s"%trace_save)

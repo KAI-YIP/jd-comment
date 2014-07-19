@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 
-f=open('/home/alber/experiment/test.txt','r')
+f=open('/home/alber/experiment/20140719/dell_result1.txt','r')
 txt=f.readlines()
 f.close()
 word_dict={}
@@ -24,6 +24,7 @@ y=[]
 for k,v in word_frequency:
 	y.append(v)
 x=range(len(y))
+print (len(x))
 plt.xlabel("中文坐标")
 plt.plot(x,y)
 plt.show()
