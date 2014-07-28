@@ -20,11 +20,23 @@ word_frequency=sorted(word_dict.items(), key=lambda d: d[1],reverse=True)
 print (word_frequency)
 
 x=[]
+x_word=[]
 y=[]
+count=0
 for k,v in word_frequency:
+	x_word.append(k)
 	y.append(v)
+	if count==50:
+		break
+	else:
+		count+=1
 x=range(len(y))
 print (len(x))
-plt.xlabel("中文坐标")
+plt.xlabel("中文坐标",color='green')
 plt.plot(x,y)
+plt.xticks(x,x_word)
+for label in plt.gca().xaxis.get_ticklabels(): 
+     label.set_rotation(90)
+     label.set_ha('center')
+     label.set_color('red')
 plt.show()

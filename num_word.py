@@ -20,5 +20,5 @@ for line in txt:
 			pass
 	count1+=count2
 	lenth_count.append(count1)
-plt.plot(lenth_count)
+plt.plot(range(len(lenth_count)),lenth_count)
 plt.show()
