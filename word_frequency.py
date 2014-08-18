@@ -2,10 +2,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
-import Tkinter
 
-
-f=open('/home/alber/experiment/20140719/dell_result1.txt','r')
+f=open('/home/alber/NLP/20140719/dell_result1.txt','r')
 txt=f.readlines()
 f.close()
 word_dict={}

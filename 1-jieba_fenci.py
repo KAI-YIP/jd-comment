@@ -2,13 +2,13 @@
 import jieba  
 import sys 
 sys.path.append("../") 
-jieba.load_userdict("/home/alber/jieba3k/jieba/user_dict.txt")
+jieba.load_userdict("/home/alber/jieba/user_dict.txt")
 import jieba.posseg as pseg 
 import time  
 t1=time.time() 
 
-stopwords = {}.fromkeys([ line.rstrip() for line in open('/home/alber/jieba3k/jieba/stopwords.txt') ])
-f1=open("/home/alber/llq_text.txt","r") #读取文本  
+stopwords = {}.fromkeys([ line.rstrip() for line in open('/home/alber/jieba/stopwords.txt') ])
+f1=open("/home/alber/llq.txt","r") #读取文本  
 txtlist=f1.readlines()
 f1.close()
 f2=open("/home/alber/llq_seg.txt",'a')
