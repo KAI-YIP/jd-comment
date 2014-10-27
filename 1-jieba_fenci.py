@@ -2,12 +2,12 @@
 import jieba  
 import sys 
 sys.path.append("../") 
-jieba.load_userdict("/home/alber/jieba/user_dict.txt")
+jieba.load_userdict("/home/alber/jieba/user_dict.txt")　　　　　#用户词表位置
 import jieba.posseg as pseg 
 import time  
 t1=time.time() 
 
-stopwords = {}.fromkeys([ line.rstrip() for line in open('/home/alber/jieba/stopwords.txt') ])
+stopwords = {}.fromkeys([ line.rstrip() for line in open('/home/alber/jieba/stopwords.txt') ])    #听用词表位置
 f1=open("/home/alber/llq.txt","r") #读取文本  
 txtlist=f1.readlines()
 f1.close()
